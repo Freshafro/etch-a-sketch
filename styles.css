@@ -1,20 +1,22 @@
 body {
     background-color: azure;
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 
 #container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin: 0 auto;
+    display: grid;
+    width: 800px;
+    height: 800px;
 }
 
 #container div {
-    width: 6%;
-    line-height: 70px;
     border: 1px solid black;
     text-align: center;
+}
+
+button {
+    margin-bottom: 2%;
 }
 
 .hover {
