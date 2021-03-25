@@ -1,31 +1,56 @@
 const body = document.querySelector("body");
 const container = document.querySelector("#container");
+const button = document.querySelector("button");
 
-let counter = 1;
+let userInput;
 
-function createDiv() {
-    const div = document.createElement("div");
-    div.textContent = counter;
-    container.appendChild(div);
-}
+while (true) {
+    userInput = prompt("How many squares per side? (Max: 100)");
 
-function createLayout(width, height) {
-    for (let i = 0; i < height; i++) {
-        for (let j = 0; j < width; j++) {
-            createDiv();
-            counter++;
-        }
+    if (userInput < 100) {
+        createLayout(userInput);
+        break;
     }
 }
 
-createLayout(16, 16);
+button.addEventListener("click", e => {
+    window.location.reload();
+    /*allDivs.forEach(element => {
+        //element.classList.remove("hover");
+        element.style.backgroundColor = "azure";
+    });*/
+    // userInput = prompt("How many squares per side? (Max: 100)");
+});
+
+function createDiv() {
+    const div = document.createElement("div");
+    container.appendChild(div);
+}
+
+function createLayout(squares = 16) {
+    
+    for (let i = 0; i < squares * squares; i++) {
+        createDiv();
+    }
+
+    container.style["grid-template-columns"] = `repeat(${squares}, auto)`;
+    container.style["grid-template-rows"] = `repeat(${squares}, auto)`;
+
+}
+
+const randomColor = function(min, max) {
+    return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+const r = randomColor(0, 255);
+const g = randomColor(0, 255);
+const b = randomColor(0, 255);
 
 const allDivs = document.querySelectorAll("#container div");
-allDivs.forEach(element => {
-    element.addEventListener("mouseover", e => {
-        e.target.classList.add("hover");
-        e.target.addEventListener("mouseleave", e => {
-            e.target.classList.remove("hover");
+setTimeout(function (){
+    allDivs.forEach(element => {
+        element.addEventListener("mouseover", e => {
+            e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
         });
     });
-});
+}, 1000);
