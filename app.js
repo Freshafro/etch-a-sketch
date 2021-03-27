@@ -5,10 +5,13 @@ const button = document.querySelector("button");
 let userInput;
 
 while (true) {
-    userInput = prompt("How many squares per side? (Max: 100)");
+    userInput = prompt("How many squares per side? (Max: 100)", "16");
 
-    if (userInput < 100) {
+    if (userInput < 100 && userInput != null) {
         createLayout(userInput);
+        break;
+    } else if (userInput == null) {
+        createLayout();
         break;
     }
 }
@@ -35,22 +38,21 @@ function createLayout(squares = 16) {
 
     container.style["grid-template-columns"] = `repeat(${squares}, auto)`;
     container.style["grid-template-rows"] = `repeat(${squares}, auto)`;
-
 }
 
 const randomColor = function(min, max) {
     return min + Math.floor(Math.random() * (max - min + 1));
 }
 
-const r = randomColor(0, 255);
+/*const r = randomColor(0, 255);
 const g = randomColor(0, 255);
-const b = randomColor(0, 255);
+const b = randomColor(0, 255);*/
 
 const allDivs = document.querySelectorAll("#container div");
-setTimeout(function (){
+setTimeout(function (e){
     allDivs.forEach(element => {
         element.addEventListener("mouseover", e => {
-            e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            e.target.style.backgroundColor = `rgb(0, 0, 0)`;
         });
     });
 }, 1000);
